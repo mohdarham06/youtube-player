@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css2?family=Mooli&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/* UNIVERSAL SELECTOR */
+* {
+    font-family: 'Mooli', 'Ubuntu', sans-serif;
+
+    /** It will remove all default 
+    ** margins and paddings */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+
+/* || ROOT || */
+:root {
+    --dark: #2d374e;
+    --darkest: #301142;
+    --grey: #7183a5;
+    --pink: #EC4899;
+    --purple: #8B5CF6;
+    --white: whitesmoke;
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    /* background: #9a75ac; */
+    color: white;
+}
+
+.root {
+    width: 100%;
+    /* max-width: 800px; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #061525;
+}
+
+
+
+main {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header,
+footer {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+
+/* video container */
+.video-container {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    margin-inline: auto;
+    background: black;
+}
+
+video {
+    width: 100%;
+}
+
+.video-container.theater,
+.video-container.full-screen {
+    max-width: initial;
+    width: 100%;
+}
+
+/* theater */
+.video-container.theater {
+    max-height: 80%;
+}
+
+/* fullscreen */
+.video-container.full-screen {
+    max-height: 100vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* video controls */
+.video-controls-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+.video-controls-container::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+    width: 100%;
+    aspect-ratio: 7 / 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.video-container:hover .video-controls-container,
+.video-container:focus-within .video-controls-container,
+.video-container.paused .video-controls-container {
+    opacity: 1;
+}
+
+
+
+.video-controls-container .controls {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.25rem;
+    align-items: center;
+}
+
+.video-controls-container .controls button {
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity 150ms ease-in-out;
+}
+
+.video-controls-container .controls button:hover,
+.video-controls-container .controls button:active {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+/* pause/play icons */
+.video-container.paused .pause-icon {
+    display: none;
+}
+
+.video-container:not(.paused) .play-icon {
+    display: none;
+}
+
+
+
+
+
+
+/* volume icons */
+.volume-high-icon,
+.volume-low-icon,
+.volume-muted-icon {
+    display: none;
+}
+
+.video-container[data-volume-level="high"] .volume-high-icon {
+    display: block;
+}
+
+.video-container[data-volume-level="low"] .volume-low-icon {
+    display: block;
+}
+
+.video-container[data-volume-level="muted"] .volume-muted-icon {
+    display: block;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+}
+
+
+.volume-slider {
+    cursor: pointer;
+    width: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: all 150ms ease-in-out;
+}
+
+.volume-container:hover .volume-slider {
+    transform: scaleX(1);
+    width: 100px;
+}
+
+
+
+
+
+
+/* duration */
+.duration-container {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-grow: 1;
+}
+
+
+
+/* captions */
+.video-container.captions .captions-btn {
+    border-bottom: 3px solid red;
+}
+
+
+
+/* speed */
+.video-controls-container .controls button.wide-btn {
+    width: 50px;
+}
+
+
+
+
+/* theater icons */
+.video-container.theater .tall {
+    display: none;
+}
+
+.video-container:not(.theater) .wide {
+    display: none;
+}
+
+/* fullscreen icons */
+.video-container.full-screen .open {
+    display: none;
+}
+
+.video-container:not(.full-screen) .close {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* timeline */
+.timeline-container {
+    height: 7px;
+    margin-inline: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.timeline {
+    background: rgba(100, 100, 100, 0.5);
+    height: 3px;
+    width: 100%;
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: calc(100% - var(--preview-position) * 100%);
+    background: rgb(150, 150, 150);
+    display: none;
+}
+
+.timeline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: calc(100% - var(--progress-position) * 100%);
+    background: red;
+}
+
+.timeline .thumb-indicator {
+    --scale: 0;
+    position: absolute;
+    transform: translateX(-50%) scale(var(--scale));
+    height: 200%;
+    top: -50%;
+    left: calc(var(--progress-position) * 100%);
+    background: red;
+    border-radius: 50%;
+    transition: transform 150ms ease-in-out;
+    aspect-ratio: 1 / 1;
+}
+
+.timeline .preview-img {
+    position: absolute;
+    height: 80px;
+    aspect-ratio: 16 / 9;
+    top: -1rem;
+    transform: translate(-50%, -100%);
+    left: calc(var(--preview-position) * 100%);
+    border-radius: 0.25rem;
+    border: 2px solid white;
+    display: none;
+}
+
+.thumbnail-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+
+.video-container.scrubbing .timeline,
+.timeline-container:hover .timeline {
+    height: 100%;
+}
+
+.video-container.scrubbing .timeline::before,
+.timeline-container:hover .timeline::before {
+    display: block;
+}
+
+.video-container.scrubbing .thumb-indicator,
+.timeline-container:hover .thumb-indicator {
+    --scale: 1.1;
+}
+
+.video-container.scrubbing .preview-img,
+.timeline-container:hover .preview-img {
+    display: block;
+}
+
+.video-container.scrubbing .thumbnail-img {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer .credit {
+    color: #9c9fa5;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+footer div {
+    height: 1px;
+    width: 90%;
+    background-color: #9c9fa5;
+    margin-bottom: 1rem;
+}
+
+
+
+/* --  > 576 px px  */
+@media only screen and (max-width: 576px) {
+
+    html {
+        font-size: 70%;
+    }
+}
