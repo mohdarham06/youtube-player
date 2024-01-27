@@ -312,3 +312,7 @@ function handleTimeLineUpdate(e) {
 
 
 
+const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+
+document.querySelector('#credit').innerHTML = `&copy; Mohd Arham ${currentYear} &lt;/&gt;`;
